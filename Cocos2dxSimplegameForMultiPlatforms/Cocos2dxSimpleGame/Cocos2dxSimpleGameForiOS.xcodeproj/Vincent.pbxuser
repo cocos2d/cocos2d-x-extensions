@@ -1,0 +1,202 @@
+// !$*UTF8*$!
+{
+	1D6058900D05DD3D006BFB54 /* Cocos2dxSimpleGameForiOS */ = {
+		activeExec = 0;
+		executables = (
+			BF193D46135FFB09002463D2 /* Cocos2dxSimpleGameForiOS */,
+		);
+	};
+	29B97313FDCFA39411CA2CEA /* Project object */ = {
+		activeBuildConfigurationName = Debug;
+		activeExecutable = BF193D46135FFB09002463D2 /* Cocos2dxSimpleGameForiOS */;
+		activeTarget = 1D6058900D05DD3D006BFB54 /* Cocos2dxSimpleGameForiOS */;
+		addToTargets = (
+			1D6058900D05DD3D006BFB54 /* Cocos2dxSimpleGameForiOS */,
+		);
+		codeSenseManager = BF193D5A135FFB12002463D2 /* Code sense */;
+		executables = (
+			BF193D46135FFB09002463D2 /* Cocos2dxSimpleGameForiOS */,
+		);
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					561,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXConfiguration.PBXTargetDataSource.PBXTargetDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					301,
+					60,
+					20,
+					48,
+					43,
+					43,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXTargetDataSource_PrimaryAttribute,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 325057595;
+			PBXWorkspaceStateSaveDate = 325057595;
+		};
+		perUserProjectItems = {
+			BF193D91135FFD2F002463D2 /* PBXTextBookmark */ = BF193D91135FFD2F002463D2 /* PBXTextBookmark */;
+			BF193D92135FFD2F002463D2 /* PBXTextBookmark */ = BF193D92135FFD2F002463D2 /* PBXTextBookmark */;
+			BF193D93135FFD2F002463D2 /* PBXTextBookmark */ = BF193D93135FFD2F002463D2 /* PBXTextBookmark */;
+			BF193D94135FFD2F002463D2 /* PBXTextBookmark */ = BF193D94135FFD2F002463D2 /* PBXTextBookmark */;
+			BF193DAB135FFD9F002463D2 /* PBXTextBookmark */ = BF193DAB135FFD9F002463D2 /* PBXTextBookmark */;
+		};
+		sourceControlManager = BF193D59135FFB12002463D2 /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	506EE05D10304ED200A389B3 /* cocos2d libraries */ = {
+		activeExec = 0;
+	};
+	BF19164112E052E1007DCFF1 /* LICENSE.cocos2d-x */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {519, 551}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 426}";
+		};
+	};
+	BF193D46135FFB09002463D2 /* Cocos2dxSimpleGameForiOS */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 0;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		dataTipCustomDataFormattersEnabled = 1;
+		dataTipShowTypeColumn = 1;
+		dataTipSortType = 0;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = Cocos2dxSimpleGameForiOS;
+		showTypeColumn = 0;
+		sourceDirectories = (
+		);
+	};
+	BF193D59135FFB12002463D2 /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	BF193D5A135FFB12002463D2 /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	BF193D91135FFD2F002463D2 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BF19164112E052E1007DCFF1 /* LICENSE.cocos2d-x */;
+		name = "LICENSE.cocos2d-x: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 426;
+		vrLoc = 0;
+	};
+	BF193D92135FFD2F002463D2 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BF835DD31328687E00F3C033 /* CCConfiguration.h */;
+		name = "CCConfiguration.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 616;
+		vrLoc = 0;
+	};
+	BF193D93135FFD2F002463D2 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = D4082350132F3DE800F44E75 /* Cocos2dxSimpleGameForiOSAppController.mm */;
+		name = "Cocos2dxSimpleGameForiOSAppController.mm: 12";
+		rLen = 0;
+		rLoc = 291;
+		rType = 0;
+		vrLen = 340;
+		vrLoc = 0;
+	};
+	BF193D94135FFD2F002463D2 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BF83631B13286EF300F3C033 /* HelloWorldScene.cpp */;
+		name = "HelloWorldScene.cpp: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 220;
+		vrLoc = 0;
+	};
+	BF193DAB135FFD9F002463D2 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BF83631B13286EF300F3C033 /* HelloWorldScene.cpp */;
+		name = "HelloWorldScene.cpp: 8";
+		rLen = 0;
+		rLoc = 147;
+		rType = 0;
+		vrLen = 346;
+		vrLoc = 0;
+	};
+	BF835DD31328687E00F3C033 /* CCConfiguration.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {519, 2527}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 616}";
+		};
+	};
+	BF83631B13286EF300F3C033 /* HelloWorldScene.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {739, 6327}}";
+			sepNavSelRange = "{147, 0}";
+			sepNavVisRange = "{0, 346}";
+		};
+	};
+	D4082350132F3DE800F44E75 /* Cocos2dxSimpleGameForiOSAppController.mm */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {439, 2147}}";
+			sepNavSelRange = "{315, 0}";
+			sepNavVisRange = "{200, 221}";
+		};
+	};
+}
