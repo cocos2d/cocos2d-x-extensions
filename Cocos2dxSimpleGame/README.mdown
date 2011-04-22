@@ -11,14 +11,14 @@ This code is using cocos2d-0.99.5-x-0.8.2 stable release.
 How to build
 ===========
 
-1. iOS
+## iOS
+
 Before compilation, you need to copy these two folder: Cocos2dxSimpleGame/cocos2dx & Cocos2dxSimpleGame/CocosDenshion into Cocos2dxSimpleGame/Cocos2dxSimpleGame/libs.
 
 Then double click Cocos2dxSimpleGame/Cocos2dxSimpleGame/Cocos2dxSimpleGameForiOS.xcodeproj to open it in xcode. Build and run it.
 
-___________
 
-2. Android
+## Android
 
 If you have experience on runing cocos2d-x HelloWorld on android, it will be the same to run Cocos2dxSimpleGame. If you haven't, please read this wiki http://www.cocos2d-x.org/projects/cocos2d-x/wiki/How_to_run_HelloWorld_on_ndk_r4_and_r5 and try.
 
@@ -34,15 +34,11 @@ in Cocos2dxSimpleGame/Cocos2dxSimpleGame/android/build_native.sh is enough.  In 
 
 After then, create an android project from the existing source, point to the folder Cocos2dxSimpleGame/Cocos2dxSimpleGame/android, clean the project to pack it, and run on emulator or device.
 
-___________
-
-3. win32
+## win32
 
 Double click Cocos2dxSimpleGame/cocos2d-win32.vc2008.sln, open it in VisualStudio, build and run. It's too easy.
 
-___________
-
-4. WoPhone
+## WoPhone
 
 Double click Cocos2dSimpleGame/cocos2d-wophone.sln, build and run it on wophone emulator. We haven't prepare it for wophone device, the Makefile.ARM is empty. If you wanna to, please modify Cocos2dxSimpleGameForWoPhone_Arm.TMK3 to generate Makefile.ARM, then build it.
 
