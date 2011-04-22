@@ -1,5 +1,3 @@
-Cocos2dxSimpleGame 
-
 About
 ===========
 This game is ported from Ray Wenderlich's Cocos2dSimpleGame http://www.raywenderlich.com/352/how-to-make-a-simple-iphone-game-with-cocos2d-tutorial, which is a worldwide famous guideline for cocos2d beginners. So, special thanks to Ray Wenderlich at the start.
@@ -13,14 +11,15 @@ This code is using cocos2d-0.99.5-x-0.8.2 stable release.
 How to build
 ===========
 
-iOS
-___________
+1. iOS
 Before compilation, you need to copy these two folder: Cocos2dxSimpleGame/cocos2dx & Cocos2dxSimpleGame/CocosDenshion into Cocos2dxSimpleGame/Cocos2dxSimpleGame/libs.
 
 Then double click Cocos2dxSimpleGame/Cocos2dxSimpleGame/Cocos2dxSimpleGameForiOS.xcodeproj to open it in xcode. Build and run it.
 
-Android
 ___________
+
+2. Android
+
 If you have experience on runing cocos2d-x HelloWorld on android, it will be the same to run Cocos2dxSimpleGame. If you haven't, please read this wiki http://www.cocos2d-x.org/projects/cocos2d-x/wiki/How_to_run_HelloWorld_on_ndk_r4_and_r5 and try.
 
 For beginners, use android-ndk-r4 from crystax.net is recommend, which can modify as little as possible. Just modify these 2 lines 
@@ -35,12 +34,16 @@ in Cocos2dxSimpleGame/Cocos2dxSimpleGame/android/build_native.sh is enough.  In 
 
 After then, create an android project from the existing source, point to the folder Cocos2dxSimpleGame/Cocos2dxSimpleGame/android, clean the project to pack it, and run on emulator or device.
 
-win32
 ___________
+
+3. win32
+
 Double click Cocos2dxSimpleGame/cocos2d-win32.vc2008.sln, open it in VisualStudio, build and run. It's too easy.
 
-WoPhone
 ___________
+
+4. WoPhone
+
 Double click Cocos2dSimpleGame/cocos2d-wophone.sln, build and run it on wophone emulator. We haven't prepare it for wophone device, the Makefile.ARM is empty. If you wanna to, please modify Cocos2dxSimpleGameForWoPhone_Arm.TMK3 to generate Makefile.ARM, then build it.
 
 Feedback
