@@ -129,7 +129,9 @@ bool HelloWorld::init()
 		_targets = new CCMutableArray<CCSprite*>;
 		_projectiles = new CCMutableArray<CCSprite*>;
 
-		this->schedule( schedule_selector(HelloWorld::update) );
+		// use updateGame instead of update, otherwise it will conflit with SelectorProtocol::update
+		// see http://www.cocos2d-x.org/boards/6/topics/1478
+		this->schedule( schedule_selector(HelloWorld::updateGame) );
 
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("background-music-aac.wav", true);
 
@@ -270,7 +272,7 @@ void HelloWorld::ccTouchesEnded(CCSet* touches, CCEvent* event)
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("pew-pew-lei.wav");
 }
 
-void HelloWorld::update(ccTime dt)
+void HelloWorld::updateGame(ccTime dt)
 {
 	CCMutableArray<CCSprite*> *projectilesToDelete =        
 

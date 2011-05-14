@@ -50,7 +50,7 @@ public:
 
 	void gameLogic(cocos2d::ccTime dt);
 
-	void update(cocos2d::ccTime dt);
+	void updateGame(cocos2d::ccTime dt);
 
 	void registerWithTouchDispatcher();
 
