@@ -1,0 +1,3 @@
+Cocos2d-x Extensions
+
+Here's the repo for cocos2d-x extensions in c++. Let's rock :)
