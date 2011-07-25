@@ -26,6 +26,10 @@
 		BF31DF0112E9784500D4F513 /* libCocosDenshion.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF31DEAE12E9780200D4F513 /* libCocosDenshion.a */; };
 		BF3326F413690DA4007CAA22 /* RootViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF3326F313690DA4007CAA22 /* RootViewController.mm */; };
 		C6DB254313DD6602000E8D18 /* cocos2dx in Resources */ = {isa = PBXBuildFile; fileRef = C6DB254213DD6602000E8D18 /* cocos2dx */; };
+		C6DB255913DD6AA8000E8D18 /* AdvanceSpriteTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6DB255813DD6AA8000E8D18 /* AdvanceSpriteTest.cpp */; };
+		C6DB255D13DD6B24000E8D18 /* Box2D in Resources */ = {isa = PBXBuildFile; fileRef = C6DB255A13DD6B24000E8D18 /* Box2D */; };
+		C6DB255E13DD6B24000E8D18 /* chipmunk in Resources */ = {isa = PBXBuildFile; fileRef = C6DB255B13DD6B24000E8D18 /* chipmunk */; };
+		C6DB255F13DD6B24000E8D18 /* CocosDenshion in Resources */ = {isa = PBXBuildFile; fileRef = C6DB255C13DD6B24000E8D18 /* CocosDenshion */; };
 		D429012E13B1D16900A3772F /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D429012D13B1D16900A3772F /* libcurl.a */; };
 		D429014E13B1D39900A3772F /* AdvanceParticleQuadSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D429014313B1D39900A3772F /* AdvanceParticleQuadSystem.cpp */; };
 		D429014F13B1D39900A3772F /* AdvanceSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D429014513B1D39900A3772F /* AdvanceSprite.cpp */; };
@@ -96,6 +100,12 @@
 		BF3326F213690DA4007CAA22 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		BF3326F313690DA4007CAA22 /* RootViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RootViewController.mm; sourceTree = "<group>"; };
 		C6DB254213DD6602000E8D18 /* cocos2dx */ = {isa = PBXFileReference; lastKnownFileType = folder; name = cocos2dx; path = "../../../cocos2d-x/cocos2dx"; sourceTree = "<group>"; };
+		C6DB255413DD6A80000E8D18 /* AdvanceParticleTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvanceParticleTest.h; sourceTree = "<group>"; };
+		C6DB255513DD6A80000E8D18 /* AdvanceSpriteTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvanceSpriteTest.h; sourceTree = "<group>"; };
+		C6DB255813DD6AA8000E8D18 /* AdvanceSpriteTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AdvanceSpriteTest.cpp; sourceTree = "<group>"; };
+		C6DB255A13DD6B24000E8D18 /* Box2D */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Box2D; path = "../../../cocos2d-x/Box2D"; sourceTree = "<group>"; };
+		C6DB255B13DD6B24000E8D18 /* chipmunk */ = {isa = PBXFileReference; lastKnownFileType = folder; name = chipmunk; path = "../../../cocos2d-x/chipmunk"; sourceTree = "<group>"; };
+		C6DB255C13DD6B24000E8D18 /* CocosDenshion */ = {isa = PBXFileReference; lastKnownFileType = folder; name = CocosDenshion; path = "../../../cocos2d-x/CocosDenshion"; sourceTree = "<group>"; };
 		D429012D13B1D16900A3772F /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ../../cocos2dx/platform/third_party/ios/libraries/libcurl.a; sourceTree = "<group>"; };
 		D429014313B1D39900A3772F /* AdvanceParticleQuadSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AdvanceParticleQuadSystem.cpp; sourceTree = "<group>"; };
 		D429014413B1D39900A3772F /* AdvanceParticleQuadSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvanceParticleQuadSystem.h; sourceTree = "<group>"; };
@@ -113,7 +123,6 @@
 		D429015813B1D3AA00A3772F /* arial16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arial16.png; sourceTree = "<group>"; };
 		D429015A13B1D3AA00A3772F /* spritesheet1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spritesheet1.png; sourceTree = "<group>"; };
 		D429016213B1D3F300A3772F /* AdvanceParticleTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AdvanceParticleTest.cpp; sourceTree = "<group>"; };
-		D429016313B1D3F300A3772F /* AdvanceParticleTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvanceParticleTest.h; sourceTree = "<group>"; };
 		D429016413B1D3F300A3772F /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppDelegate.cpp; sourceTree = "<group>"; };
 		D429016513B1D3F300A3772F /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D429016613B1D3F300A3772F /* controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = controller.cpp; sourceTree = "<group>"; };
@@ -216,6 +225,9 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				C6DB255A13DD6B24000E8D18 /* Box2D */,
+				C6DB255B13DD6B24000E8D18 /* chipmunk */,
+				C6DB255C13DD6B24000E8D18 /* CocosDenshion */,
 				C6DB254213DD6602000E8D18 /* cocos2dx */,
 				D429016013B1D3F300A3772F /* tests */,
 				D429015213B1D3AA00A3772F /* resources */,
@@ -337,8 +349,10 @@
 		D429016113B1D3F300A3772F /* AdvancedSpriteAndParticle */ = {
 			isa = PBXGroup;
 			children = (
+				C6DB255413DD6A80000E8D18 /* AdvanceParticleTest.h */,
+				C6DB255813DD6AA8000E8D18 /* AdvanceSpriteTest.cpp */,
+				C6DB255513DD6A80000E8D18 /* AdvanceSpriteTest.h */,
 				D429016213B1D3F300A3772F /* AdvanceParticleTest.cpp */,
-				D429016313B1D3F300A3772F /* AdvanceParticleTest.h */,
 			);
 			path = AdvancedSpriteAndParticle;
 			sourceTree = "<group>";
@@ -512,6 +526,9 @@
 				D429015E13B1D3AA00A3772F /* arial16.png in Resources */,
 				D429015F13B1D3AA00A3772F /* spritesheet1.png in Resources */,
 				C6DB254313DD6602000E8D18 /* cocos2dx in Resources */,
+				C6DB255D13DD6B24000E8D18 /* Box2D in Resources */,
+				C6DB255E13DD6B24000E8D18 /* chipmunk in Resources */,
+				C6DB255F13DD6B24000E8D18 /* CocosDenshion in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -533,6 +550,7 @@
 				D429016E13B1D3F300A3772F /* AppDelegate.cpp in Sources */,
 				D429016F13B1D3F300A3772F /* controller.cpp in Sources */,
 				D429017013B1D3F300A3772F /* testBasic.cpp in Sources */,
+				C6DB255913DD6AA8000E8D18 /* AdvanceSpriteTest.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
