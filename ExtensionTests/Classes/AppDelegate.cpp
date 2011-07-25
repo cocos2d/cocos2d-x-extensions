@@ -2,10 +2,8 @@
 
 #include "cocos2d.h"
 #include "tests/controller.h"
-#include "SimpleAudioEngine.h"
 
 USING_NS_CC;
-using namespace CocosDenshion;
 
 AppDelegate::AppDelegate()
 {
@@ -14,7 +12,6 @@ AppDelegate::AppDelegate()
 
 AppDelegate::~AppDelegate()
 {
-    SimpleAudioEngine::end();
 }
 
 bool AppDelegate::initInstance()
@@ -54,7 +51,6 @@ bool AppDelegate::initInstance()
 #ifndef _TRANZDA_VM_  
         // on wophone emulator, we copy resources files to Work7/NEWPLUS/TDA_DATA/Data folder instead of zip file
         cocos2d::CCFileUtils::setResource("TestCocos2dx.zip");
-        CocosDenshion::SimpleAudioEngine::setResource("TestCocos2dx.zip");
 #endif
 
 #endif
@@ -101,12 +97,10 @@ bool AppDelegate::applicationDidFinishLaunching()
 void AppDelegate::applicationDidEnterBackground()
 {
     CCDirector::sharedDirector()->pause();
-    SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();   
 }
 
 // this function will be called when the app is active again
 void AppDelegate::applicationWillEnterForeground()
 {
     CCDirector::sharedDirector()->resume();
-    SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();   
 }

@@ -1,19 +1,11 @@
 #include "controller.h"
-#include "testResource.h"
+#include "tests.h"
+
+using namespace cocos2d;
 
 #define LINE_SPACE          40
 
 static CCPoint s_tCurPos = CCPointZero;
-
-static ccDeviceOrientation s_eOrientation = CCDeviceOrientationPortrait;
-static void ChangeOrientation(ccDeviceOrientation eOrientation)
-{
-    if (s_eOrientation != eOrientation)
-    {
-        s_eOrientation = eOrientation;
-        CCDirector::sharedDirector()->setDeviceOrientation(eOrientation);
-    }
-}
 
 static TestScene* CreateTestScene(int nIdx)
 {
@@ -24,11 +16,11 @@ static TestScene* CreateTestScene(int nIdx)
     switch (nIdx)
     {
     case TEST_NDCX_LIST:
-        // pScene = new NdCxListTestScene(); break;
+        pScene = new NdCxListTestScene(); break;
     case TEST_ADVANCE_SPRITE:
-        // pScene = new AdvanceSpriteTestScene(); break;
+        pScene = new AdvanceSpriteScene(); break;
     case TEST_ADVANCE_PARTICLE:
-        // pScene = new AdvanceParticleScene(); break;
+        pScene = new AdvanceParticleTestScene(); break;
     default:
         break;
     }
@@ -39,11 +31,8 @@ static TestScene* CreateTestScene(int nIdx)
 TestController::TestController()
 : m_tBeginPos(CCPointZero)
 {
-    // change to default orientation
-    ChangeOrientation(CCDeviceOrientationPortrait);
-
     // add close menu
-    CCMenuItemImage *pCloseItem = CCMenuItemImage::itemFromNormalImage(s_pPathClose, s_pPathClose, this, menu_selector(TestController::closeCallback) );
+    CCMenuItemImage *pCloseItem = CCMenuItemImage::itemFromNormalImage("close.png", "close.png", this, menu_selector(TestController::closeCallback) );
     CCMenu* pMenu =CCMenu::menuWithItems(pCloseItem, NULL);
     CCSize s = CCDirector::sharedDirector()->getWinSize();
 
@@ -63,9 +52,6 @@ TestController::TestController()
 
         m_pItmeMenu->addChild(pMenuItem, i + 10000);
         pMenuItem->setPosition( CCPointMake( s.width / 2, (s.height - (i + 1) * LINE_SPACE) ));
-
-        // record the pointer of the menu item
-        m_pMenuItems[i] = pMenuItem;
     }
 
     m_pItmeMenu->setContentSize(CCSizeMake(s.width, (TESTS_COUNT + 1) * (LINE_SPACE)));

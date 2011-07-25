@@ -1,5 +1,7 @@
-#include "ParticleTest.h"
-#include "../testResource.h"
+#include "AdvanceParticleTest.h"
+#include "AdvanceSpriteAndParticle/CCAdvanceParticleExample.h"
+
+using namespace cocos2d;
 
 enum 
 {
@@ -14,7 +16,7 @@ enum
 void ParticleAnimation::onEnter()
 {
     ParticleDemo::onEnter();
-    
+
     CCSprite *tSprite = CCSprite::spriteWithFile("Images/spritesheet1.png");
     m_emitter = CCParticleAniamtion::node();
     m_emitter->retain();
@@ -124,9 +126,9 @@ ParticleDemo::ParticleDemo(void)
 	tapScreen->setPosition( CCPointMake(s.width/2, s.height-80) );
 	addChild(tapScreen, 100);
 	
-	CCMenuItemImage* item1 = CCMenuItemImage::itemFromNormalImage(s_pPathB1, s_pPathB2, this, menu_selector(ParticleDemo::backCallback) );
-	CCMenuItemImage* item2 = CCMenuItemImage::itemFromNormalImage(s_pPathR1, s_pPathR2, this, menu_selector(ParticleDemo::restartCallback) );
-	CCMenuItemImage* item3 = CCMenuItemImage::itemFromNormalImage(s_pPathF1, s_pPathF2,  this, menu_selector(ParticleDemo::nextCallback) );
+	CCMenuItemImage* item1 = CCMenuItemImage::itemFromNormalImage("b1.png", "b2.png", this, menu_selector(ParticleDemo::backCallback) );
+	CCMenuItemImage* item2 = CCMenuItemImage::itemFromNormalImage("r1.png", "r2.png", this, menu_selector(ParticleDemo::restartCallback) );
+	CCMenuItemImage* item3 = CCMenuItemImage::itemFromNormalImage("f1.png", "f2.png",  this, menu_selector(ParticleDemo::nextCallback) );
 	
 	CCMenuItemToggle* item4 = CCMenuItemToggle::itemWithTarget(	this, 
 																menu_selector(ParticleDemo::toggleCallback), 
@@ -151,7 +153,7 @@ ParticleDemo::ParticleDemo(void)
 	labelAtlas->setPosition( CCPointMake(s.width-66,50) );
 	
 	// moving background
-	m_background = CCSprite::spriteWithFile(s_back3);
+	m_background = CCSprite::spriteWithFile("Images/background3.png");
 	addChild(m_background, 5);
 	m_background->setPosition( CCPointMake(s.width/2, s.height-180) );
 
@@ -238,7 +240,7 @@ void ParticleDemo::restartCallback(CCObject* pSender)
 
 void ParticleDemo::nextCallback(CCObject* pSender)
 {
-	CCScene* s = new ParticleTestScene();
+	CCScene* s = new AdvanceParticleTestScene();
 	s->addChild( nextParticleAction() );
 	CCDirector::sharedDirector()->replaceScene(s);
     s->release();
@@ -246,7 +248,7 @@ void ParticleDemo::nextCallback(CCObject* pSender)
 
 void ParticleDemo::backCallback(CCObject* pSender)
 {
-	CCScene* s = new ParticleTestScene();
+	CCScene* s = new AdvanceParticleTestScene();
 	s->addChild( backParticleAction() );
 	CCDirector::sharedDirector()->replaceScene(s);
     s->release();
@@ -259,7 +261,7 @@ void ParticleDemo::setEmitterPosition()
 	m_emitter->setPosition( CCPointMake(s.width / 2, s.height / 2) );
 }
 
-void ParticleTestScene::runThisTest()
+void AdvanceParticleTestScene::runThisTest()
 {
     addChild(nextParticleAction());
 
