@@ -1,9 +1,9 @@
 //
 //  AdvanceSprite.h
-//  FlyingFreak
 //
 //  Created by varadharaj on 16/05/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  
+//  Copyright 2011 __Sourcebits Technologies Pvt. Ltd., Bangalore.__. All rights reserved.
 //
 
 //#include "cocos2d.h"

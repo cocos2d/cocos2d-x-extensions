@@ -2,7 +2,8 @@
 //  AdvanceParticleQuadSystem.cpp
 //  
 //  Created by varadharaj on 31/05/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  
+//  Copyright 2011 __Sourcebits Technologies Pvt. Ltd., Bangalore.__. All rights reserved.
 //
 
 #include "AdvanceParticleQuadSystem.h"
