@@ -94,6 +94,11 @@ public class Cocos2dxActivity extends Activity{
         };
     }
     
+    public static String getCurrentLanguage() {
+    	String languageName = java.util.Locale.getDefault().getLanguage();
+    	return languageName;
+    }
+    
     public static void showMessageBox(String title, String message){
     	Message msg = new Message();
     	msg.what = HANDLER_SHOW_DIALOG;
@@ -144,8 +149,8 @@ public class Cocos2dxActivity extends Activity{
     	backgroundMusicPlayer.setBackgroundVolume(volume);
     }
     
-    public static int playEffect(String path){
-    	return soundPlayer.playEffect(path);
+    public static int playEffect(String path, boolean isLoop){
+    	return soundPlayer.playEffect(path, isLoop);
     }
     
     public static void stopEffect(int soundId){
@@ -175,6 +180,10 @@ public class Cocos2dxActivity extends Activity{
     
     public static String getCocos2dxPackageName(){
     	return packageName;
+    }
+    
+    public static void terminateProcess(){
+    	android.os.Process.killProcess(android.os.Process.myPid());
     }
 
     @Override

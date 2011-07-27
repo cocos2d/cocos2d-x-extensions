@@ -81,9 +81,18 @@ class TextInputWraper implements TextWatcher, OnEditorActionListener {
 				LogD("deleteBackward");
 			}
 			String text = v.getText().toString();
+			
+			/*
+			 * If user input nothing, translate "\n" to engine.
+			 */
+			if (text.compareTo("") == 0){
+				text = "\n";
+			}
+			
 			if ('\n' != text.charAt(text.length() - 1)) {
 				text += '\n';
 			}
+			
 			final String insertText = text;
 			mMainView.insertText(insertText);
 			LogD("insertText(" + insertText + ")");
@@ -195,6 +204,7 @@ public class Cocos2dxGLSurfaceView extends GLSurfaceView {
     		linearParams.height = 0;
     		mTextField.setLayoutParams(linearParams);
     		mTextField.setOnEditorActionListener(textInputWraper);
+    		this.requestFocus();
     	}
     }
     
