@@ -12,7 +12,7 @@ struct MyItemListener : public NdCxListItemClickListener
     }
 };
 
-static MyItemListener* s_listener = NULL;
+static MyItemListener s_listener;
 
 void NdCxListTest::onEnter()
 {
@@ -34,16 +34,9 @@ void NdCxListTest::onEnter()
     lvitem = NdCxListItem::itemWithColor(itemColor1);
     listview->addChild(lvitem, false);
 
-    s_listener = new MyItemListener();
-    listview->registerItemClickListener(s_listener);
+    listview->registerItemClickListener(&s_listener);
     listview->setPosition(lvPos);
     addChild(listview);
-}
-
-void NdCxListTest::onExit()
-{
-    removeAllChildrenWithCleanup(true);
-    CC_SAFE_DELETE(s_listener);
 }
 
 void NdCxListTestScene::runThisTest()
