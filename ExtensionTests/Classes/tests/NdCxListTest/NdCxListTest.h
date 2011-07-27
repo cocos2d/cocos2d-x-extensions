@@ -13,7 +13,6 @@ class NdCxListTest : public cocos2d::CCLayer
 {
 public:
     virtual void onEnter();
-    virtual void onExit();
 };
 
 #endif // __NDCXLIST_TEST_H__
