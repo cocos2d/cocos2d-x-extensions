@@ -2,7 +2,7 @@
 #define __NDCX_LIST_H__
 
 #include <time.h>
-#include "../platform/platform.h"
+#include "platform/platform.h"
 #include "NdCxListItem.h"
 #include <vector>
 using namespace cocos2d;

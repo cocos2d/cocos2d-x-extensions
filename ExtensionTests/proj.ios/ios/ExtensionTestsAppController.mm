@@ -1,19 +1,17 @@
 //
-//  iphoneAppDelegate.m
-//  iphone
+//  ExtensionTestsAppController.mm
+//  ExtensionTests
 //
-//  Created by Walzer on 10-11-16.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Created by Walzer on 11-7-28.
+//  Copyright __MyCompanyName__ 2011. All rights reserved.
 //
-
-#import "testsAppDelegate.h"
-
-#import "EAGLView.h"
+#import <UIKit/UIKit.h>
+#import "ExtensionTestsAppController.h"
 #import "cocos2d.h"
+#import "EAGLView.h"
 #import "AppDelegate.h"
-#import "RootViewController.h"
 
-@implementation AppController
+@implementation ExtensionTestsAppController
 
 #pragma mark -
 #pragma mark Application lifecycle
@@ -27,33 +25,22 @@ static AppDelegate s_sharedApplication;
 
     // Add the view controller's view to the window and display.
     window = [[UIWindow alloc] initWithFrame: [[UIScreen mainScreen] bounds]];
-    
-    // Init the EAGLView
     EAGLView *__glView = [EAGLView viewWithFrame: [window bounds]
                                      pixelFormat: kEAGLColorFormatRGBA8
                                      depthFormat: GL_DEPTH_COMPONENT16_OES
                               preserveBackbuffer: NO
                                       sharegroup: nil
                                    multiSampling: NO
-                                 numberOfSamples: 0];
-    [__glView setMultipleTouchEnabled:YES];
-
-    // Use RootViewController manage EAGLView 
-	viewController = [[RootViewController alloc] initWithNibName:nil bundle:nil];
-	viewController.wantsFullScreenLayout = YES;
-    viewController.view = __glView;
-
-    // Set RootViewController to window
-    window.rootViewController = viewController;
+                                 numberOfSamples: 0 ];
+    [window addSubview: __glView];
     [window makeKeyAndVisible];
-    
-    [[UIApplication sharedApplication] setStatusBarHidden:true];
-    
-    cocos2d::CCApplication::sharedApplication().run();
 
+    [[UIApplication sharedApplication] setStatusBarHidden: YES];
+    
+    cocos2d::CCDirector::sharedDirector()->setDeviceOrientation(cocos2d::kCCDeviceOrientationLandscapeLeft);
+    cocos2d::CCApplication::sharedApplication().run();
     return YES;
 }
-
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     /*
@@ -104,7 +91,6 @@ static AppDelegate s_sharedApplication;
 
 
 - (void)dealloc {
-    [window release];
     [super dealloc];
 }
 
