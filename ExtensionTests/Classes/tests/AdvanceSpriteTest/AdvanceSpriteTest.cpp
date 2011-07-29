@@ -48,5 +48,5 @@ std::string AdvanceSpriteTest::title()
 
 AdvanceSpriteTest::~AdvanceSpriteTest()
 {
-    
+    CC_SAFE_RELEASE(m_pAdvanceSprite);
 }

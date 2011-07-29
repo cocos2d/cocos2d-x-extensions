@@ -50,7 +50,7 @@ bool AppDelegate::initInstance()
 
 #ifndef _TRANZDA_VM_  
         // on wophone emulator, we copy resources files to Work7/NEWPLUS/TDA_DATA/Data folder instead of zip file
-        cocos2d::CCFileUtils::setResource("TestCocos2dx.zip");
+        cocos2d::CCFileUtils::setResource("ExtensionTests.zip");
 #endif
 
 #endif
