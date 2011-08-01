@@ -32,23 +32,23 @@ namespace NdCxControl
                 }
 
                 if (i % 4 == 0)
-                    m_pSquareColors[i] = color.r;
+                    m_pSquareColors[i].r = color.r;
                 else if (i % 4 == 1)
-                    m_pSquareColors[i] = color.g;
+                    m_pSquareColors[i].g = color.g;
                 else if (i % 4 ==2)
-                    m_pSquareColors[i] = color.b;
+                    m_pSquareColors[i].b = color.b;
                 else
-                    m_pSquareColors[i] = m_cOpacity;
+                    m_pSquareColors[i].a = m_cOpacity;
             }
         }
         else
         {
             for( unsigned int i=0; i < 4; i++ )
             {
-                m_pSquareColors[i * 4]     = m_tColor.r;
-                m_pSquareColors[i * 4 + 1] = m_tColor.g;
-                m_pSquareColors[i * 4 + 2] = m_tColor.b;
-                m_pSquareColors[i * 4 + 3] = m_cOpacity;
+                m_pSquareColors[i * 4].r     = m_tColor.r;
+                m_pSquareColors[i * 4 + 1].g = m_tColor.g;
+                m_pSquareColors[i * 4 + 2].b = m_tColor.b;
+                m_pSquareColors[i * 4 + 3].a = m_cOpacity;
             }
         }
     }

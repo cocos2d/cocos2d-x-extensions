@@ -1,0 +1,70 @@
+defines
+{
+	# chipmunk currently only supported on Mac OS (Xcode).
+	# if you want to use the chipmunk - set AIRPLAYUSECHIPMUNK = 1
+	AIRPLAYUSECHIPMUNK = 0
+}
+
+options
+{
+	s3e-data-dir="../Resources"
+	
+	module_path="../../../cocos2dx/proj.airplay/"
+
+}
+
+includepaths
+{
+	..
+	../Classes
+	../../extensions
+}
+subprojects
+{
+	IwGL
+	cocos2dx
+}
+
+files
+{
+	[Main]
+	
+	Main.h
+	Main.cpp
+	(../Classes/)
+	AppDelegate.h
+	AppDelegate.cpp
+
+    [extensions/AdvanceSpriteAndParticle]
+    (../../extensions/AdvanceSpriteAndParticle)
+    "*.h"
+    "*.cpp"
+
+    [extensions/NdControls]
+    (../../extensions/NdControls)
+    "*.h"
+    "*.cpp"
+
+	[Tests]
+	("../Classes/tests")
+	controller.h
+	controller.cpp
+	tests.h
+	testBasic.h
+	testBasic.cpp
+
+	[Tests/AdvancedParticleTest]
+	("../Classes/tests/AdvancedParticleTest")
+	"*.h"
+	"*.cpp"
+
+	[Tests/AdvanceSpriteTest]
+	("../Classes/tests/AdvanceSpriteTest")
+	"*.h"
+	"*.cpp"
+
+    [Tests/NdCxListTest]
+	("../Classes/tests/NdCxListTest")
+	"*.h"
+	"*.cpp"
+}
