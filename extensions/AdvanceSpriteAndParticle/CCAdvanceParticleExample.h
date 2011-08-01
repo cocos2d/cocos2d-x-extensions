@@ -32,13 +32,13 @@ THE SOFTWARE.
 namespace cocos2d {
     
 //! @brief A rain particle system
-class CC_DLL CCParticleAniamtion : public AdvanceParticleQuadSystem
+class CCParticleAniamtion : public AdvanceParticleQuadSystem
 {
 public:
     CCParticleAniamtion(){}
     virtual ~CCParticleAniamtion(){}
     bool init(){ return initWithTotalParticles(10); }
-    virtual bool initWithTotalParticles(int numberOfParticles);
+    virtual bool initWithTotalParticles(unsigned int numberOfParticles) { return AdvanceParticleQuadSystem::initWithTotalParticles(numberOfParticles); };
     static CCParticleAniamtion * node()
     {
         CCParticleAniamtion *pRet = new CCParticleAniamtion();

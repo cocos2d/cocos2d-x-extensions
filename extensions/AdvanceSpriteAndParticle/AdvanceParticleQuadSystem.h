@@ -34,7 +34,7 @@ namespace cocos2d {
      - It supports subrects
      @since v0.8
      */
-    class CC_DLL AdvanceParticleQuadSystem : public CCParticleSystem
+    class AdvanceParticleQuadSystem : public CCParticleSystem
     {
     protected:
         ccV2F_C4F_T2F_Quad	*m_pQuads;		// quads to be rendered
@@ -53,7 +53,7 @@ namespace cocos2d {
         int	m_nItemHeight;
         //Emition Rate
         float m_ftEmitCounter;
-        int m_tParticleTexCount;
+        unsigned int m_tParticleTexCount;
         GLfloat m_tWidth;
         GLfloat m_tHeight;
         
@@ -108,7 +108,7 @@ namespace cocos2d {
         void addTexturePoints();
          /**********************************************************************/
         // super methods
-        virtual bool initWithTotalParticles(int numberOfParticles);
+        virtual bool initWithTotalParticles(unsigned int numberOfParticles);
         virtual void setTexture(CCTexture2D* var);
         virtual void updateQuadWithParticle(tCCParticle* particle, CCPoint newPosition);
         virtual void postStep();

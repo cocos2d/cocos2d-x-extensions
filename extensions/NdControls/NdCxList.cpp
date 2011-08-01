@@ -1,4 +1,4 @@
-#include "../effects/CCGrid.h"
+#include "effects/CCGrid.h"
 #include "NdCxList.h"
 
 namespace NdCxControl 
