@@ -1,4 +1,5 @@
 #include "CCScrollLayer.h"
+#include "CCTouchHandler.h"
 
 #include <assert.h>
 
@@ -111,7 +112,7 @@ namespace cocos2d {
 		CCTouchHandler* handler = CCTouchDispatcher::sharedDispatcher()->findHandler(this);
 		
 		if(handler){
-			CCTargetedTouchHandler* targetedHandler = dynamic_cast<CCTargetedTouchHandler*>(handler);
+			CCTargetedTouchHandler* targetedHandler = (CCTargetedTouchHandler*)(handler);
 			if(targetedHandler){
 				if (!targetedHandler->getClaimedTouches()->containsObject(aTouch))
 				{

@@ -70,7 +70,7 @@ public:
 	CC_SYNTHESIZE(float, minimumTouchLengthToChangePage_, MinimumTouchLengthToChangePage); 
 
 	// Whenever show or not gray/white dots under scrolling content.
-	CC_SYNTHESIZE(BOOL, showPagesIndicator_, ShowPagesIndicator);
+	CC_SYNTHESIZE(bool, showPagesIndicator_, ShowPagesIndicator);
 
 protected:
 	void claimTouch(CCTouch * aTouch);

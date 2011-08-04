@@ -31,7 +31,7 @@ namespace cocos2d {
 		CCMenuItem *_curHighlighted;
 	public:
 		void setSelectedRadioItem(CCMenuItem * item);
-		static CCRadioMenu * CCRadioMenu::radioMenuWithItems(CCMenuItem* item, ...);
+		static CCRadioMenu * radioMenuWithItems(CCMenuItem* item, ...);
 	protected:
 		bool ccTouchBegan(CCTouch *touch ,CCEvent *event) ;
 		void ccTouchEnded(CCTouch *touch ,CCEvent *event) ;
