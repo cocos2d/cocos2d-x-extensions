@@ -1,8 +1,5 @@
 #ifndef __CCSCROLLLAYER__
 #define __CCSCROLLLAYER__
-
-#define SCROLLTESTCODE
-
 //  CCScrollLayer.h
 //
 //  Copyright 2010 DK101
@@ -33,60 +30,144 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
+// Original source: https://github.com/cocos2d/cocos2d-iphone-extensions/tree/master/Extensions/CCScrollLayer 
+// Last updated: September 18, 2011 
+
 #include <cocos2d.h>
 
 namespace cocos2d {
-/* 
- It is a very clean and elegant subclass of CCLayer that lets you pass-in an array 
- of layers and it will then create a smooth scroller. 
- Complete with the "snapping" effect. You can create screens with anything that can be added to a CCLayer.
+
+	class CCScrollLayer;
+
+	class CCScrollLayerDelegate
+	{
+	public:
+		/** Called when scroll layer begins scrolling.
+		 * Usefull to cancel CCTouchDispatcher standardDelegates.
+		 */
+		virtual void scrollLayerScrollingStarted(CCScrollLayer* sender) {}
+
+		/** Called at the end of moveToPage:
+		 * Doesn't get called in selectPage:
+		 */
+		virtual void scrollLayer(CCScrollLayer* sender, unsigned int page) {}
+	};
+
+	/* 
+	 It is a very clean and elegant subclass of CCLayer that lets you pass-in an array 
+	 of layers and it will then create a smooth scroller. 
+	 Complete with the "snapping" effect. You can create screens with anything that can be added to a CCLayer.
  
- */ 
+	 */ 
+	class CCScrollLayer : 	public CCLayer
+	{
+	public:
+		CCScrollLayer();
+		~CCScrollLayer();
 
+		static CCScrollLayer* nodeWithLayers(CCArray* layers, int widthOffset); 
+		
+		bool initWithLayers(CCArray* layers, int widthOffset); 
 
-class CCScrollLayer : 	public CCLayer
-{
-	// Holds the current width of the screen substracting offset.
-	float scrollWidth_;
+		/** Updates all pages positions & adds them as children if needed.
+		 * Can be used to update position of pages after screen reshape, or 
+		 * for update after dynamic page add/remove. 
+		 */
+		void updatePages();
 
-	// The x coord of initial point the user starts their swipe.
-	float startSwipe_;
+		/** Adds new page and reorders pages trying to set given number for newly added page.
+		 * If number > pages count - adds new page to the right end of the scroll layer.
+		 * If number <= 0 - adds new page to the left end of the scroll layer. 
+		 * @attention Designated addPage method. 
+		 */
+		void addPage(CCLayer* aPage, unsigned int pageNumber);
 
-	// Internal state of scrollLayer (scrolling or idle).
-	int state_; 
-public:
-	static CCScrollLayer*  nodeWithLayers(CCArray *layers , int widthOffset); 
-	CCScrollLayer(CCArray* layers, int widthOffset);
-	// Holds the current page being displayed.
-	CC_SYNTHESIZE(int, currentScreen_, CurrentScreen);
+		/** Adds new page to the right end of the scroll layer. */
+		void addPage(CCLayer* aPage);
 
-	// A count of the total screens available.
-	CC_SYNTHESIZE(int, totalScreens_, TotalScreens);
+		/** Removes page if it's one of scroll layers pages (not children)
+		 * Does nothing if page not found.
+		 */
+		void removePage(CCLayer* aPage);
 
-	// For what distance user must slide finger to start scrolling menu.
-	CC_SYNTHESIZE(float, minimumTouchLengthToSlide_, MinimumTouchLengthToSlide); 
+		/** Removes page with given number. Doesn nothing if there's no page for such number. */
+		void removePageWithNumber(unsigned int pageNumber);
 
-	// For what distance user must slide finger to change the page.
-	CC_SYNTHESIZE(float, minimumTouchLengthToChangePage_, MinimumTouchLengthToChangePage); 
+		/* Moves scrollLayer to page with given number & invokes delegate
+		 * method scrollLayer:scrolledToPageNumber: at the end of CCMoveTo action. 
+		 * Does nothing if number >= totalScreens or < 0.
+		 */
+		void moveToPage(unsigned int pageNumber);
 
-	// Whenever show or not gray/white dots under scrolling content.
-	CC_SYNTHESIZE(bool, showPagesIndicator_, ShowPagesIndicator);
+		/* Immedeatly moves scrollLayer to page with given number without running CCMoveTo. 
+		 * Does nothing if number >= totalScreens or < 0.
+		 */
+		void selectPage(unsigned int pageNumber);
 
-protected:
-	void claimTouch(CCTouch * aTouch);
-	void cancelAndStoleTouch(CCTouch *touch , CCEvent * event);
-	bool ccTouchBegan(CCTouch * touch, CCEvent * event);
-	void ccTouchMoved(CCTouch * touch , CCEvent * event);
-	void ccTouchEnded(CCTouch * touch , CCEvent * event);
-	void registerWithTouchDispatcher();
-	void moveToPage(int page);
-	void visit();
-};
+		CC_SYNTHESIZE(CCScrollLayerDelegate*, m_pDelegate, Delegate);
 
-#ifdef SCROLLTESTCODE
-void addScrollTest(cocos2d::CCLayer* l, cocos2d::SelectorProtocol* target, cocos2d::SEL_MenuHandler selector);
-#endif
+		/** Calibration property. Minimum moving touch length that is enough
+		 * to cancel menu items and start scrolling a layer. 
+		 */
+		CC_SYNTHESIZE(CGFloat, m_fMinimumTouchLengthToSlide, MinimumTouchLengthToSlide);
 
+		/** Calibration property. Minimum moving touch length that is enough to change
+		 * the page, without snapping back to the previous selected page.
+		 */
+		CC_SYNTHESIZE(CGFloat, m_fMinimumTouchLengthToChangePage, MinimumTouchLengthToChangePage);
+
+		/** If YES - when starting scrolling CCScrollLayer will claim touches, that are 
+		 * already claimed by others targetedTouchDelegates by calling CCTouchDispatcher#touchesCancelled
+		 * Usefull to have ability to scroll with touch above menus in pages.
+		 * If NO - scrolling will start, but no touches will be cancelled.
+		 * Default is YES.
+		 */
+		CC_SYNTHESIZE(bool, m_bStealTouches, StealTouches);
+
+		/** Whenever show or not white/grey dots under the scroll layer.
+		 * If yes - dots will be rendered in parents transform (rendered after scroller visit).
+		 */
+		CC_SYNTHESIZE(bool, m_bShowPagesIndicator, ShowPagesIndicator);
+
+		/** Position of dots center in parent coordinates. 
+		 * (Default value is screenWidth/2, screenHeight/4)
+		 */
+		CC_SYNTHESIZE_PASS_BY_REF(CCPoint, m_tPagesIndicatorPosition, PagesIndicatorPosition);
+
+		/** Total pages available in scrollLayer. */
+		int getTotalScreens() const;
+
+		/** Current page number, that is shown. Belongs to the [0, totalScreen] interval. */
+		CC_SYNTHESIZE_READONLY(unsigned int, m_uCurrentScreen, CurrentScreen);
+
+		/** Offset, that can be used to let user see next/previous page. */
+		CC_SYNTHESIZE(CGFloat, m_fPagesWidthOffset, PagesWidthOffset);
+
+		/** Array of pages CCLayer's  */
+		CC_SYNTHESIZE_READONLY(CCArray*, m_pLayers, Pages);
+	protected:
+		// The x coord of initial point the user starts their swipe.
+		CGFloat m_fStartSwipe;
+
+		// Internal state of scrollLayer (scrolling or idle).
+		int m_iState;
+		bool m_bStealingTouchInProgress;
+		// Holds the touch that started the scroll
+		CCTouch* m_pScrollTouch;
+
+		void visit();
+		void moveToPageEnded();
+		unsigned int pageNumberForPosition(const CCPoint& position);
+		CCPoint positionForPageWithNumber(unsigned int pageNumber);
+		void claimTouch(CCTouch* pTouch);
+		void cancelAndStoleTouch(CCTouch* pTouch, CCEvent* pEvent);
+
+		void registerWithTouchDispatcher();
+		bool ccTouchBegan(CCTouch* pTouch, CCEvent* pEvent);
+		void ccTouchMoved(CCTouch* pTouch, CCEvent* pEvent);
+		void ccTouchEnded(CCTouch* pTouch, CCEvent* pEvent);
+		void ccTouchCancelled(CCTouch* pTouch, CCEvent* pEvent);
+	};
 }
 
 #endif
