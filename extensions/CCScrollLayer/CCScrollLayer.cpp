@@ -146,7 +146,7 @@ namespace cocos2d
 	void CCScrollLayer::moveToPageEnded()
 	{
 		if (m_pDelegate)
-			m_pDelegate->scrollLayer(this, m_uCurrentScreen);
+			m_pDelegate->scrollLayerScrolledToPageNumber(this, m_uCurrentScreen);
 	}
 
 	unsigned int CCScrollLayer::pageNumberForPosition(const CCPoint& position)

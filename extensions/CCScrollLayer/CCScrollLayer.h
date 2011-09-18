@@ -50,7 +50,7 @@ namespace cocos2d {
 		/** Called at the end of moveToPage:
 		 * Doesn't get called in selectPage:
 		 */
-		virtual void scrollLayer(CCScrollLayer* sender, unsigned int page) {}
+		virtual void scrollLayerScrolledToPageNumber(CCScrollLayer* sender, unsigned int page) {}
 	};
 
 	/* 
