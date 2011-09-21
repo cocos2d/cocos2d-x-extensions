@@ -351,20 +351,20 @@ namespace cocos2d
 		CCPoint touchPoint = pTouch->locationInView(pTouch->view());
 		touchPoint = CCDirector::sharedDirector()->convertToGL(touchPoint);
 
-		unsigned int selected_page = m_uCurrentScreen;
+		unsigned int selectedPage = m_uCurrentScreen;
 		float delta = touchPoint.x - m_fStartSwipe;
 		if (fabs(delta) >= m_fMinimumTouchLengthToChangePage)
 		{
-			selected_page = pageNumberForPosition(m_tPosition);
-			if (selected_page == m_uCurrentScreen)
+			selectedPage = pageNumberForPosition(m_tPosition);
+			if (selectedPage == m_uCurrentScreen)
 			{
-				if (delta < 0.f && selected_page < m_pLayers->count() - 1)
-					selected_page++;
-				else if (delta > 0.f && selected_page > 0)
-					selected_page--;
+				if (delta < 0.f && selectedPage < m_pLayers->count() - 1)
+					selectedPage++;
+				else if (delta > 0.f && selectedPage > 0)
+					selectedPage--;
 			}
 		}
-		moveToPage(selected_page);
+		moveToPage(selectedPage);
 	}
 }
 
