@@ -152,14 +152,14 @@ namespace cocos2d
 	unsigned int CCScrollLayer::pageNumberForPosition(const CCPoint& position)
 	{
 		CGFloat pageFloat = - m_tPosition.x / (m_tContentSize.width - m_fPagesWidthOffset);
-		unsigned int pageNumber = (int)ceilf(pageFloat);
+		int pageNumber = (int)ceilf(pageFloat);
 		if ((CGFloat)pageNumber - pageFloat  >= 0.5f)
 			pageNumber--;
 
 		pageNumber = MAX(0, pageNumber);
-		pageNumber = MIN(m_pLayers->count() - 1, pageNumber);
+		pageNumber = MIN((int)m_pLayers->count() - 1, pageNumber);
 
-		return pageNumber;
+		return (unsigned int)pageNumber;
 	}
 
 
