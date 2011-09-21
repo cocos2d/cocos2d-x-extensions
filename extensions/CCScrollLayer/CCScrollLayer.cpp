@@ -57,6 +57,8 @@ namespace cocos2d
 		// Set default minimum touch length to scroll.
 		m_fMinimumTouchLengthToSlide = 30.0f;
 		m_fMinimumTouchLengthToChangePage = 100.0f;
+		
+		m_fMarginOffset = 50.0f;
 
 		// Show indicator by default.
 		m_bShowPagesIndicator = true;
@@ -331,26 +333,38 @@ namespace cocos2d
 		}
 
 		if (m_iState == kCCScrollLayerStateSliding)
-			setPosition(ccp((m_uCurrentScreen * -1.f * (m_tContentSize.width - m_fPagesWidthOffset)) + (touchPoint.x - m_fStartSwipe), 0));
-
+		{
+			float offset = touchPoint.x - m_fStartSwipe;
+			if ((m_uCurrentScreen == 0 && offset > 0) || (m_uCurrentScreen == m_pLayers->count() - 1 && offset < 0))
+				offset = m_fMarginOffset * offset / CCDirector::sharedDirector()->getWinSize().width;
+			setPosition(ccp((m_uCurrentScreen * -1.f * (m_tContentSize.width - m_fPagesWidthOffset)) + offset, 0));
+		}
 	}
 
 	void CCScrollLayer::ccTouchEnded(CCTouch* pTouch, CCEvent* pEvent)
 	{
-		if(m_pScrollTouch == pTouch)
-			m_pScrollTouch = NULL;
+		if(m_pScrollTouch != pTouch)
+			return;
+
+		m_pScrollTouch = NULL;
 
 		CCPoint touchPoint = pTouch->locationInView(pTouch->view());
 		touchPoint = CCDirector::sharedDirector()->convertToGL(touchPoint);
 
-		CGFloat newX = touchPoint.x;	
-
-		if ((newX - m_fStartSwipe) < -m_fMinimumTouchLengthToChangePage && (m_uCurrentScreen + 1) < m_pLayers->count())
-			moveToPage(pageNumberForPosition(m_tPosition));	
-		else if ((newX - m_fStartSwipe) > m_fMinimumTouchLengthToChangePage && m_uCurrentScreen > 0)	
-			moveToPage(pageNumberForPosition(m_tPosition));
-		else
-			moveToPage(m_uCurrentScreen);
+		unsigned int selected_page = m_uCurrentScreen;
+		float delta = touchPoint.x - m_fStartSwipe;
+		if (fabs(delta) >= m_fMinimumTouchLengthToChangePage)
+		{
+			selected_page = pageNumberForPosition(m_tPosition);
+			if (selected_page == m_uCurrentScreen)
+			{
+				if (delta < 0.f && selected_page < m_pLayers->count() - 1)
+					selected_page++;
+				else if (delta > 0.f && selected_page > 0)
+					selected_page--;
+			}
+		}
+		moveToPage(selected_page);
 	}
 }
 
