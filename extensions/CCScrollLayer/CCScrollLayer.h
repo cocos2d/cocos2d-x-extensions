@@ -142,6 +142,9 @@ namespace cocos2d {
 
 		/** Offset, that can be used to let user see next/previous page. */
 		CC_SYNTHESIZE(CGFloat, m_fPagesWidthOffset, PagesWidthOffset);
+		
+		/** Offset that can be used to let user see empty space over first or last page. */
+		CC_SYNTHESIZE(CGFloat, m_fMarginOffset, MarginOffset);
 
 		/** Array of pages CCLayer's  */
 		CC_SYNTHESIZE_READONLY(CCArray*, m_pLayers, Pages);
