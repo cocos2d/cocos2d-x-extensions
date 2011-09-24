@@ -57,6 +57,8 @@ namespace cocos2d
 		// Set default minimum touch length to scroll.
 		m_fMinimumTouchLengthToSlide = 30.0f;
 		m_fMinimumTouchLengthToChangePage = 100.0f;
+		
+		m_fMarginOffset = 50.0f;
 
 		// Show indicator by default.
 		m_bShowPagesIndicator = true;
@@ -152,14 +154,14 @@ namespace cocos2d
 	unsigned int CCScrollLayer::pageNumberForPosition(const CCPoint& position)
 	{
 		CGFloat pageFloat = - m_tPosition.x / (m_tContentSize.width - m_fPagesWidthOffset);
-		unsigned int pageNumber = (int)ceilf(pageFloat);
+		int pageNumber = (int)ceilf(pageFloat);
 		if ((CGFloat)pageNumber - pageFloat  >= 0.5f)
 			pageNumber--;
 
 		pageNumber = MAX(0, pageNumber);
-		pageNumber = MIN(m_pLayers->count() - 1, pageNumber);
+		pageNumber = MIN((int)m_pLayers->count() - 1, pageNumber);
 
-		return pageNumber;
+		return (unsigned int)pageNumber;
 	}
 
 
@@ -331,26 +333,38 @@ namespace cocos2d
 		}
 
 		if (m_iState == kCCScrollLayerStateSliding)
-			setPosition(ccp((m_uCurrentScreen * -1.f * (m_tContentSize.width - m_fPagesWidthOffset)) + (touchPoint.x - m_fStartSwipe), 0));
-
+		{
+			float offset = touchPoint.x - m_fStartSwipe;
+			if ((m_uCurrentScreen == 0 && offset > 0) || (m_uCurrentScreen == m_pLayers->count() - 1 && offset < 0))
+				offset = m_fMarginOffset * offset / CCDirector::sharedDirector()->getWinSize().width;
+			setPosition(ccp((m_uCurrentScreen * -1.f * (m_tContentSize.width - m_fPagesWidthOffset)) + offset, 0));
+		}
 	}
 
 	void CCScrollLayer::ccTouchEnded(CCTouch* pTouch, CCEvent* pEvent)
 	{
-		if(m_pScrollTouch == pTouch)
-			m_pScrollTouch = NULL;
+		if(m_pScrollTouch != pTouch)
+			return;
+
+		m_pScrollTouch = NULL;
 
 		CCPoint touchPoint = pTouch->locationInView(pTouch->view());
 		touchPoint = CCDirector::sharedDirector()->convertToGL(touchPoint);
 
-		CGFloat newX = touchPoint.x;	
-
-		if ((newX - m_fStartSwipe) < -m_fMinimumTouchLengthToChangePage && (m_uCurrentScreen + 1) < m_pLayers->count())
-			moveToPage(pageNumberForPosition(m_tPosition));	
-		else if ((newX - m_fStartSwipe) > m_fMinimumTouchLengthToChangePage && m_uCurrentScreen > 0)	
-			moveToPage(pageNumberForPosition(m_tPosition));
-		else
-			moveToPage(m_uCurrentScreen);
+		unsigned int selectedPage = m_uCurrentScreen;
+		float delta = touchPoint.x - m_fStartSwipe;
+		if (fabs(delta) >= m_fMinimumTouchLengthToChangePage)
+		{
+			selectedPage = pageNumberForPosition(m_tPosition);
+			if (selectedPage == m_uCurrentScreen)
+			{
+				if (delta < 0.f && selectedPage < m_pLayers->count() - 1)
+					selectedPage++;
+				else if (delta > 0.f && selectedPage > 0)
+					selectedPage--;
+			}
+		}
+		moveToPage(selectedPage);
 	}
 }
 
