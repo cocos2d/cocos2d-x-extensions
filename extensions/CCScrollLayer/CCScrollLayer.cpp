@@ -23,7 +23,7 @@ namespace cocos2d
 		m_pDelegate = NULL;
 	}
 
-	int CCScrollLayer::getTotalScreens() const
+	unsigned int CCScrollLayer::getTotalScreens() const
 	{
 		return m_pLayers->count();
 	}
@@ -58,7 +58,7 @@ namespace cocos2d
 		m_fMinimumTouchLengthToSlide = 30.0f;
 		m_fMinimumTouchLengthToChangePage = 100.0f;
 		
-		m_fMarginOffset = 50.0f;
+		m_fMarginOffset = CCDirector::sharedDirector()->getWinSize().width;
 
 		// Show indicator by default.
 		m_bShowPagesIndicator = true;
@@ -122,6 +122,7 @@ namespace cocos2d
 			glEnable(GL_POINT_SMOOTH);
 			GLboolean blendWasEnabled = glIsEnabled(GL_BLEND);
 			glEnable(GL_BLEND);
+			
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 			glPointSize(6.0f * CC_CONTENT_SCALE_FACTOR());
 
@@ -334,10 +335,14 @@ namespace cocos2d
 
 		if (m_iState == kCCScrollLayerStateSliding)
 		{
-			float offset = touchPoint.x - m_fStartSwipe;
-			if ((m_uCurrentScreen == 0 && offset > 0) || (m_uCurrentScreen == m_pLayers->count() - 1 && offset < 0))
-				offset = m_fMarginOffset * offset / CCDirector::sharedDirector()->getWinSize().width;
-			setPosition(ccp((m_uCurrentScreen * -1.f * (m_tContentSize.width - m_fPagesWidthOffset)) + offset, 0));
+			float desiredX = (m_uCurrentScreen * -1.f * (m_tContentSize.width - m_fPagesWidthOffset)) + touchPoint.x - m_fStartSwipe;			
+			unsigned int page = pageNumberForPosition(ccp(desiredX, 0));
+			float offset = desiredX - positionForPageWithNumber(page).x;
+			if ((page == 0 && offset > 0) || (page == m_pLayers->count() - 1 && offset < 0))
+				offset -= m_fMarginOffset * (offset / CCDirector::sharedDirector()->getWinSize().width);
+			else
+				offset = 0;
+			setPosition(ccp(desiredX - offset, 0));
 		}
 	}
 
