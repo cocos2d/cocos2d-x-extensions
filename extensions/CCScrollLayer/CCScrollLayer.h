@@ -31,7 +31,7 @@
 //  THE SOFTWARE.
 
 // Original source: https://github.com/cocos2d/cocos2d-iphone-extensions/tree/master/Extensions/CCScrollLayer 
-// Last updated: September 18, 2011 
+// Last updated: October 1, 2011 
 
 #include <cocos2d.h>
 
@@ -135,7 +135,7 @@ namespace cocos2d {
 		CC_SYNTHESIZE_PASS_BY_REF(CCPoint, m_tPagesIndicatorPosition, PagesIndicatorPosition);
 
 		/** Total pages available in scrollLayer. */
-		int getTotalScreens() const;
+		unsigned int getTotalScreens() const;
 
 		/** Current page number, that is shown. Belongs to the [0, totalScreen] interval. */
 		CC_SYNTHESIZE_READONLY(unsigned int, m_uCurrentScreen, CurrentScreen);
