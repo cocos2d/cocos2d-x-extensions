@@ -175,7 +175,7 @@ namespace cocos2d
 	{	
 		if (pageNumber >= m_pLayers->count()) 
 		{
-			CCLOGERROR("CCScrollLayer::moveToPage: %d - wrong page number, out of bounds.", page);
+			CCLOGERROR("CCScrollLayer::moveToPage: %d - wrong page number, out of bounds.", pageNumber);
 			return;
 		}
 
@@ -192,7 +192,7 @@ namespace cocos2d
 	{
 		if (pageNumber >= m_pLayers->count()) 
 		{
-			CCLOGERROR("CCScrollLayer::selectPage: %d - wrong page number, out of bounds.", page);
+			CCLOGERROR("CCScrollLayer::selectPage: %d - wrong page number, out of bounds.", pageNumber);
 			return;
 		}
 
