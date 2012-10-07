@@ -18,9 +18,9 @@ namespace cocos2d
 	}
 
 	CCScrollLayer::~CCScrollLayer()
-	{
+	{       
 		CC_SAFE_RELEASE(m_pLayers);
-		m_pDelegate = NULL;
+        m_pDelegate = NULL;
 	}
 
 	unsigned int CCScrollLayer::getTotalScreens() const
@@ -50,7 +50,7 @@ namespace cocos2d
 			return false;
 		CC_ASSERT(layers && layers->count());
 		
-		setIsTouchEnabled(true);
+		setTouchEnabled(true);
 
 		m_bStealTouches = true;
 		
@@ -68,11 +68,10 @@ namespace cocos2d
 		m_uCurrentScreen = 0;	
 
 		// Save offset.
-		m_fPagesWidthOffset = (CGFloat)widthOffset;			
+		m_fPagesWidthOffset = (float)widthOffset;
 
 		// Save array of layers.
-		m_pLayers = CCArray::arrayWithArray(layers);
-		layers->release();
+		m_pLayers = layers;
 		m_pLayers->retain();
 
 		updatePages();	
@@ -96,6 +95,12 @@ namespace cocos2d
 			i++;
 		}
 	}
+    
+    void CCScrollLayer::onExit(){
+        CCLOG("Scroll layer on exit called");
+        CCLayer::onExit();
+        this->removeAllChildrenWithCleanup(true);
+    }
 
 	// CCLayer Methods ReImpl
 
@@ -108,39 +113,32 @@ namespace cocos2d
 			int totalScreens = getTotalScreens();
 
 			// Prepare Points Array
-			CGFloat n = (CGFloat)totalScreens; //< Total points count in CGFloat.
-			CGFloat pY = m_tPagesIndicatorPosition.y; //< Points y-coord in parent coord sys.
-			CGFloat d = 16.0f; //< Distance between points.
-			CCPoint* points = new CCPoint[totalScreens];	
+			float n = (float)totalScreens; //< Total points count in CGFloat.
+			float pY = m_tPagesIndicatorPosition.y; //< Points y-coord in parent coord sys.
+			float d = 16.0f; //< Distance between points.
+			CCPoint points[10];
 			for (int i = 0; i < totalScreens; ++i)
 			{
-				CGFloat pX = m_tPagesIndicatorPosition.x + d * ((CGFloat)i - 0.5f*(n-1.0f));
+				float pX = m_tPagesIndicatorPosition.x + d * ((float)i - 0.5f*(n-1.0f));
 				points[i] = ccp(pX, pY);
 			}
-
 			// Set GL Values
-			glEnable(GL_POINT_SMOOTH);
-			GLboolean blendWasEnabled = glIsEnabled(GL_BLEND);
-			glEnable(GL_BLEND);
+			//glEnable(GL_BLEND);
+            ccPointSize( 6.0f * CC_CONTENT_SCALE_FACTOR() );
+
 			
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-			glPointSize(6.0f * CC_CONTENT_SCALE_FACTOR());
 
 			// Draw Gray Points
-			glColor4ub(0x96,0x96,0x96,0xFF);
+			ccDrawColor4B(0x96,0x96,0x96,0xFF);
 			ccDrawPoints( points, totalScreens );
 
 			// Draw White Point for Selected Page
-			glColor4ub(0xFF,0xFF,0xFF,0xFF);
+			ccDrawColor4B(0xFF,0xFF,0xFF,0xFF);
 			ccDrawPoint(points[m_uCurrentScreen]);
 
 			// Restore GL Values
-			glPointSize(1.0f);
-			glDisable(GL_POINT_SMOOTH);
-			if (! blendWasEnabled)
-				glDisable(GL_BLEND);
-
-			delete [] points;
+			ccPointSize(1.0f);
 		}
 	}
 
@@ -154,9 +152,9 @@ namespace cocos2d
 
 	unsigned int CCScrollLayer::pageNumberForPosition(const CCPoint& position)
 	{
-		CGFloat pageFloat = - m_tPosition.x / (m_tContentSize.width - m_fPagesWidthOffset);
+		float pageFloat = - m_tPosition.x / (m_tContentSize.width - m_fPagesWidthOffset);
 		int pageNumber = (int)ceilf(pageFloat);
-		if ((CGFloat)pageNumber - pageFloat  >= 0.5f)
+		if ((float)pageNumber - pageFloat  >= 0.5f)
 			pageNumber--;
 
 		pageNumber = MAX(0, pageNumber);
@@ -180,10 +178,10 @@ namespace cocos2d
 		}
 
 		CCAction* changePage = 
-			CCSequence::actionOneTwo(
-					CCMoveTo::actionWithDuration(0.3f, positionForPageWithNumber(pageNumber)),
-					CCCallFunc::actionWithTarget(this, callfunc_selector(CCScrollLayer::moveToPageEnded))
-				);
+			CCSequence::create(
+					CCMoveTo::create(0.3f, positionForPageWithNumber(pageNumber)),
+					CCCallFunc::create(this, callfunc_selector(CCScrollLayer::moveToPageEnded)),
+                    NULL);
 		runAction(changePage);
 		m_uCurrentScreen = pageNumber;
 	}
@@ -241,17 +239,17 @@ namespace cocos2d
 	// Register with more priority than CCMenu's but don't swallow touches
 	void CCScrollLayer::registerWithTouchDispatcher()
 	{	
-		CCTouchDispatcher::sharedDispatcher()->addTargetedDelegate(this, kCCMenuTouchPriority - 1, false);
+		CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, INT_MIN, false);
 	}
 
 	/** Hackish stuff - stole touches from other CCTouchDispatcher targeted delegates. 
 	 Used to claim touch without receiving ccTouchBegan. */
 	void CCScrollLayer::claimTouch(CCTouch* pTouch)
 	{
-		CCTargetedTouchHandler* handler = (CCTargetedTouchHandler*)CCTouchDispatcher::sharedDispatcher()->findHandler(this);		
+		CCTargetedTouchHandler* handler = (CCTargetedTouchHandler*)CCDirector::sharedDirector()->getTouchDispatcher()->findHandler(this);		
 		if (handler)
 		{
-			NSMutableSet* claimedTouches = handler->getClaimedTouches();
+			CCSet* claimedTouches = handler->getClaimedTouches();
 			if (!claimedTouches->containsObject(pTouch))
 			{
 				claimedTouches->addObject(pTouch);
@@ -270,7 +268,7 @@ namespace cocos2d
 		touchSet->addObject(pTouch);
 		touchSet->autorelease();
 		m_bStealingTouchInProgress = true;
-		CCTouchDispatcher::sharedDispatcher()->touchesCancelled(touchSet, pEvent);
+		CCDirector::sharedDirector()->getTouchDispatcher()->touchesCancelled(touchSet, pEvent);
 		m_bStealingTouchInProgress = false;
 
 		//< after doing this touch is already removed from all targeted handlers
@@ -299,8 +297,7 @@ namespace cocos2d
 		else
 			return false;
 
-		CCPoint touchPoint = pTouch->locationInView(pTouch->view());
-		touchPoint = CCDirector::sharedDirector()->convertToGL(touchPoint);
+		CCPoint touchPoint = pTouch->getLocation();
 
 		m_fStartSwipe = touchPoint.x;
 		m_iState = kCCScrollLayerStateIdle;
@@ -313,8 +310,7 @@ namespace cocos2d
 		if(m_pScrollTouch != pTouch)
 			return;
 
-		CCPoint touchPoint = pTouch->locationInView(pTouch->view());
-		touchPoint = CCDirector::sharedDirector()->convertToGL(touchPoint);
+		CCPoint touchPoint = pTouch->getLocation();
 
 		// If finger is dragged for more distance then minimum - start sliding and cancel pressed buttons.
 		// Of course only if we not already in sliding mode
@@ -353,8 +349,7 @@ namespace cocos2d
 
 		m_pScrollTouch = NULL;
 
-		CCPoint touchPoint = pTouch->locationInView(pTouch->view());
-		touchPoint = CCDirector::sharedDirector()->convertToGL(touchPoint);
+		CCPoint touchPoint = pTouch->getLocation();
 
 		unsigned int selectedPage = m_uCurrentScreen;
 		float delta = touchPoint.x - m_fStartSwipe;
