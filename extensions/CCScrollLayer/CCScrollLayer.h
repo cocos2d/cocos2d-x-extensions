@@ -12,6 +12,7 @@
 //
 //  Copyright 2011 Eli Yukelzon
 //
+//  Copyright 2012 Giggleup.com
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
 //  in the Software without restriction, including without limitation the rights
@@ -30,10 +31,10 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-// Original source: https://github.com/cocos2d/cocos2d-iphone-extensions/tree/master/Extensions/CCScrollLayer 
-// Last updated: October 1, 2011 
+// Original source: https://github.com/cocos2d/cocos2d-iphone-extensions/tree/master/Extensions/CCScrollLayer
+// Last updated: October 8, 2012
 
-#include <cocos2d.h>
+#include "cocos2d.h"
 
 namespace cocos2d {
 
@@ -74,7 +75,7 @@ namespace cocos2d {
 		 * for update after dynamic page add/remove. 
 		 */
 		void updatePages();
-
+        virtual void onExit();
 		/** Adds new page and reorders pages trying to set given number for newly added page.
 		 * If number > pages count - adds new page to the right end of the scroll layer.
 		 * If number <= 0 - adds new page to the left end of the scroll layer. 
@@ -109,12 +110,12 @@ namespace cocos2d {
 		/** Calibration property. Minimum moving touch length that is enough
 		 * to cancel menu items and start scrolling a layer. 
 		 */
-		CC_SYNTHESIZE(CGFloat, m_fMinimumTouchLengthToSlide, MinimumTouchLengthToSlide);
+		CC_SYNTHESIZE(float, m_fMinimumTouchLengthToSlide, MinimumTouchLengthToSlide);
 
 		/** Calibration property. Minimum moving touch length that is enough to change
 		 * the page, without snapping back to the previous selected page.
 		 */
-		CC_SYNTHESIZE(CGFloat, m_fMinimumTouchLengthToChangePage, MinimumTouchLengthToChangePage);
+		CC_SYNTHESIZE(float, m_fMinimumTouchLengthToChangePage, MinimumTouchLengthToChangePage);
 
 		/** If YES - when starting scrolling CCScrollLayer will claim touches, that are 
 		 * already claimed by others targetedTouchDelegates by calling CCTouchDispatcher#touchesCancelled
@@ -141,16 +142,16 @@ namespace cocos2d {
 		CC_SYNTHESIZE_READONLY(unsigned int, m_uCurrentScreen, CurrentScreen);
 
 		/** Offset, that can be used to let user see next/previous page. */
-		CC_SYNTHESIZE(CGFloat, m_fPagesWidthOffset, PagesWidthOffset);
+		CC_SYNTHESIZE(float, m_fPagesWidthOffset, PagesWidthOffset);
 		
 		/** Offset that can be used to let user see empty space over first or last page. */
-		CC_SYNTHESIZE(CGFloat, m_fMarginOffset, MarginOffset);
+		CC_SYNTHESIZE(float, m_fMarginOffset, MarginOffset);
 
 		/** Array of pages CCLayer's  */
 		CC_SYNTHESIZE_READONLY(CCArray*, m_pLayers, Pages);
 	protected:
 		// The x coord of initial point the user starts their swipe.
-		CGFloat m_fStartSwipe;
+		float m_fStartSwipe;
 
 		// Internal state of scrollLayer (scrolling or idle).
 		int m_iState;
